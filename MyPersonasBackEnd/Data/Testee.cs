@@ -10,7 +10,7 @@ namespace MyPersonasBackEnd.Data
     public class Testee : PersonalityProfilerDTO.Testee
     {
         public virtual ICollection<TesteeTest> TesteeTest { get; set; }
-        public virtual ICollection<TesteeHistory> TesteeHistory { get; set; }
+        
 
     }
 }
