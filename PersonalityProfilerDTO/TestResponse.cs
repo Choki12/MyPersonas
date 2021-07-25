@@ -7,6 +7,6 @@ namespace PersonalityProfilerDTO
     public class TestResponse : Test
     {
         public List<Questions> Questions { get; set; } = new List<Questions>();
-        public ICollection<Testee> Testees { get; set; } = new List<Testee>();
+        public List<Testee> Testees { get; set; } = new List<Testee>();
     }
 }
