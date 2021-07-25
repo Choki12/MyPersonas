@@ -22,29 +22,47 @@ namespace MyPersonasBackEnd.Controllers
 
         // GET: api/Testees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Testee>>> GetTestees()
+        /*
+         * Changed the GetTestee Method to return a list, the class converts a testee into a list implicitly
+         */
+        public async Task<ActionResult<IEnumerable<PersonalityProfilerDTO.TesteeResponse>>> GetTestees()
         {
-            return await _context.Testees.ToListAsync();
+            //return await _context.Testees.ToListAsync();
+            
+            var testee = await _context.Testees.AsNoTracking()
+               .Include(t => t.TesteeTest)
+               .ThenInclude(tt => tt.Test)
+               .Select(t => t.MapTesteeResponse())
+               .ToListAsync();
+
+            return testee;
         }
 
         // GET: api/Testees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Testee>> GetTestee(int id)
+        
+        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> GetTestee(int id) 
         {
-            var testee = await _context.Testees.FindAsync(id);
+            var testee = await _context.Testees.AsNoTracking()
+                                                .Include(t => t.TesteeTest)
+                                                .ThenInclude(tt => tt.Test)
+                                                .SingleOrDefaultAsync(t => t.Id == id);
 
-            if (testee == null)
+            if(testee == null)
             {
                 return NotFound();
             }
 
-            return testee;
+            return testee.MapTesteeResponse();
+
+           
         }
 
         // PUT: api/Testees/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> PutTestee(int id, Testee testee)
         {
             if (id != testee.Id)
@@ -104,6 +122,6 @@ namespace MyPersonasBackEnd.Controllers
         private bool TesteeExists(int id)
         {
             return _context.Testees.Any(e => e.Id == id);
-        }
+        }*/
     }
 }
