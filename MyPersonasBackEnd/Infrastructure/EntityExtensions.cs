@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,9 @@ namespace MyPersonasBackEnd.Data
 {
     public static class EntityExtensions
     {
+        /*
+         * Map testee response
+         */
         public static PersonalityProfilerDTO.TesteeResponse MapTesteeResponse(this Testee testee) =>
             new PersonalityProfilerDTO.TesteeResponse
             {
@@ -27,5 +31,28 @@ namespace MyPersonasBackEnd.Data
                 .ToList()
 
             };
+
+      /*
+       * Map test response
+       */
+        public static PersonalityProfilerDTO.Test MapTestResponse(this Test test) =>
+           new PersonalityProfilerDTO.TestResponse
+           {
+               Id = test.Id,
+               Type = test.Type,
+               DateTaken = test.DateTaken,
+               TestState = test.TestState,
+               Testees = (ICollection<PersonalityProfilerDTO.Testee>)test.TesteeTest?
+               .Select(tt =>
+                   new PersonalityProfilerDTO.Test
+                   {
+                       Id = tt.TestId,
+                       Type = tt.Test.Type,
+                       DateTaken = tt.Test.DateTaken,
+                       TestState = tt.Test.TestState
+                   })
+               .ToList()
+
+           };
     }
 }
