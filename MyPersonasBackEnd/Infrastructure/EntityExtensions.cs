@@ -43,6 +43,7 @@ namespace MyPersonasBackEnd.Data
                DateTaken = test.DateTaken,
                TestState = test.TestState,
                Testees = test.TesteeTest?
+               
                .Select(tt =>
                    new PersonalityProfilerDTO.Testee
                    {
@@ -72,7 +73,7 @@ namespace MyPersonasBackEnd.Data
               .Select(qq =>
                   new PersonalityProfilerDTO.Test
                   {
-                      Id = qq.Test.Id,
+                      Id = qq.TestId,
                       Type = qq.Test.Type,
                       DateTaken = qq.Test.DateTaken,
                       TestState = qq.Test.TestState                   
