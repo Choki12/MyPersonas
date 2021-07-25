@@ -42,17 +42,43 @@ namespace MyPersonasBackEnd.Data
                Type = test.Type,
                DateTaken = test.DateTaken,
                TestState = test.TestState,
-               Testees = (ICollection<PersonalityProfilerDTO.Testee>)test.TesteeTest?
+               Testees = test.TesteeTest?
                .Select(tt =>
-                   new PersonalityProfilerDTO.Test
+                   new PersonalityProfilerDTO.Testee
                    {
-                       Id = tt.TestId,
-                       Type = tt.Test.Type,
-                       DateTaken = tt.Test.DateTaken,
-                       TestState = tt.Test.TestState
+                       Id = tt.TesteeId,
+                       Email = tt.Testee.Email,
+                       Name = tt.Testee.Name,
+                       Surname = tt.Testee.Surname,
+                       DOB = tt.Testee.DOB
+
                    })
                .ToList()
 
            };
+
+      /*
+       * Map questions response
+       */
+        public static PersonalityProfilerDTO.Questions MapQuestionsResponse(this Questions Questions) =>
+          new PersonalityProfilerDTO.QuestionsResponse
+          {
+              Id = Questions.Id,
+              Question = Questions.Question,
+              State = Questions.State,
+              Number = Questions.Number,
+              Answer = Questions.Answer,
+              Tests = Questions.TestQuestion
+              .Select(qq =>
+                  new PersonalityProfilerDTO.Test
+                  {
+                      Id = qq.Test.Id,
+                      Type = qq.Test.Type,
+                      DateTaken = qq.Test.DateTaken,
+                      TestState = qq.Test.TestState                   
+                  })
+              .ToList()
+
+          };
     }
 }
