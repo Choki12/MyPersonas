@@ -94,6 +94,8 @@ namespace MyPersonasBackEnd.Data
                     });
                 }
 
+                db.Test.Add(test);
+
                 //For questions
                 questions.TestQuestion = new List<TestQuestion>();
 
@@ -103,6 +105,8 @@ namespace MyPersonasBackEnd.Data
                         Questions = tq,            
                     });
                 }
+
+                db.Questions.Add(questions);
                 
 
 

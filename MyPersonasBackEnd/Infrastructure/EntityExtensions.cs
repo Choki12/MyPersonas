@@ -75,7 +75,7 @@ namespace MyPersonasBackEnd.Data
                   {
                       Id = qq.TestId,
                       Type = qq.Test.Type,
-                      DateTaken = qq.Test.DateTaken,
+                      DateTaken = qq.Test.DateTaken,   
                       TestState = qq.Test.TestState                   
                   })
               .ToList()
