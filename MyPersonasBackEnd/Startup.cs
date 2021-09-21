@@ -17,6 +17,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace MyPersonasBackEnd
 {
@@ -53,17 +54,21 @@ namespace MyPersonasBackEnd
             services.AddSwaggerGen(options => {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "My Personas API", Version = "v1" });
                 
+                
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
-
-                
-
             });
 
-           
-         
+            services.AddControllers()
+          .AddJsonOptions(x =>
+          {
+              //x.JsonSerializerOptions.WriteIndented = !Environment.IsProduction();
+              x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+          });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,5 +101,15 @@ namespace MyPersonasBackEnd
                 endpoints.MapControllers();
             });
         }
+
+
+
+        public enum Result
+        {
+            Success,
+            Failed
+        }
+
+
     }
 }

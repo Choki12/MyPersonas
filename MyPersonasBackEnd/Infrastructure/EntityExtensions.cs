@@ -9,7 +9,7 @@ namespace MyPersonasBackEnd.Data
     public static class EntityExtensions
     {
         /*
-         * Map testee response
+         * Map testee response 
          */
         public static PersonalityProfilerDTO.TesteeResponse MapTesteeResponse(this Testee testee) =>
             new PersonalityProfilerDTO.TesteeResponse
@@ -35,7 +35,7 @@ namespace MyPersonasBackEnd.Data
       /*
        * Map test response
        */
-        public static PersonalityProfilerDTO.Test MapTestResponse(this Test test) =>
+        public static PersonalityProfilerDTO.TestResponse MapTestResponse(this Test test) =>
            new PersonalityProfilerDTO.TestResponse
            {
                Id = test.Id,
@@ -61,7 +61,7 @@ namespace MyPersonasBackEnd.Data
       /*
        * Map questions response
        */
-        public static PersonalityProfilerDTO.Questions MapQuestionsResponse(this Questions Questions) =>
+        public static PersonalityProfilerDTO.QuestionsResponse MapQuestionsResponse(this Questions Questions) =>
           new PersonalityProfilerDTO.QuestionsResponse
           {
               Id = Questions.Id,
