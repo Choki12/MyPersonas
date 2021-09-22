@@ -55,53 +55,47 @@ namespace MyPersonasBackEnd.Controllers
    
 
 
-        // PUT: api/Tests/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> PutTest(int id, Test test)
+   
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTest(int id, PersonalityProfilerDTO.Test tinput)
         {
-            if (id != test.Id)
+            var mytest = await _context.Test.FindAsync(id);
+            if (mytest == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(test).State = EntityState.Modified;
+            mytest.Id = tinput.Id;
+            mytest.Type = tinput.Type;
+            mytest.TestState = tinput.TestState;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TestExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
-        // POST: api/Tests
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
         [HttpPost]
-        public async Task<ActionResult<Test>> PostTest(Test test)
+        public async Task<ActionResult<PersonalityProfilerDTO.TestResponse>> PostTest(PersonalityProfilerDTO.Test tinput)
         {
-            _context.Test.Add(test);
+            var mytest = new Data.Test
+            {
+                //Id = tinput.Id,
+                DateTaken = tinput.DateTaken,
+                TestState = tinput.TestState,
+                Type = tinput.Type
+            };
+
+            _context.Test.Add(mytest);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTest", new { id = test.Id }, test);
+            var output = mytest.MapTestResponse();
+
+            return CreatedAtAction("GetTest", new { id = output.Id }, output);
         }
 
         // DELETE: api/Tests/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Test>> DeleteTest(int id)
+        public async Task<ActionResult<PersonalityProfilerDTO.TestResponse>> DeleteTest(int id)
         {
             var test = await _context.Test.FindAsync(id);
             if (test == null)
@@ -112,13 +106,13 @@ namespace MyPersonasBackEnd.Controllers
             _context.Test.Remove(test);
             await _context.SaveChangesAsync();
 
-            return test;
+            return test.MapTestResponse();
         }
 
         private bool TestExists(int id)
         {
             return _context.Test.Any(e => e.Id == id);
-        }*/
+        }
     }
    
 }

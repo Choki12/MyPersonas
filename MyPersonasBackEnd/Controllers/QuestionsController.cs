@@ -50,69 +50,68 @@ namespace MyPersonasBackEnd.Controllers
             return questions.MapQuestionsResponse();
         }
 
-        // PUT: api/Questions/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> PutQuestions(int id, Questions questions)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutQuestion(int id, PersonalityProfilerDTO.Questions qinput)
         {
-            if (id != questions.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(questions).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuestionsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Questions
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Questions>> PostQuestions(Questions questions)
-        {
-            _context.Questions.Add(questions);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetQuestions", new { id = questions.Id }, questions);
-        }
-
-        // DELETE: api/Questions/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Questions>> DeleteQuestions(int id)
-        {
-            var questions = await _context.Questions.FindAsync(id);
-            if (questions == null)
+            var myquestions = await _context.Questions.FindAsync(id);
+            if (myquestions == null)
             {
                 return NotFound();
             }
 
-            _context.Questions.Remove(questions);
+            myquestions.Id = qinput.Id;
+            myquestions.Number = qinput.Number;
+            myquestions.State = qinput.State;
+            myquestions.Answer = qinput.Answer;
+            
+            
             await _context.SaveChangesAsync();
-
-            return questions;
+            return NoContent();
         }
 
-        private bool QuestionsExists(int id)
+
+        [HttpPost]
+        public async Task<ActionResult<PersonalityProfilerDTO.QuestionsResponse>> PostTest(PersonalityProfilerDTO.Questions qinput)
         {
-            return _context.Questions.Any(e => e.Id == id);
-        }*/
+            var myquestions = new Data.Questions
+    
+            {
+                //Id = tinput.Id,
+                Question = qinput.Question,
+                State = qinput.State,
+                Number = qinput.Number,
+                Answer = qinput.Answer,
+                
+            };
+
+            _context.Questions.Add(myquestions);
+            await _context.SaveChangesAsync();
+
+            var output = myquestions.MapQuestionsResponse();
+
+            return CreatedAtAction("GetTest", new { id = output.Id }, output);
+        }
+
+        // DELETE: api/Tests/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<PersonalityProfilerDTO.QuestionsResponse>> DeleteTest(int id)
+        {
+            var question = await _context.Questions.FindAsync(id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            _context.Questions.Remove(question);
+            await _context.SaveChangesAsync();
+
+            return question.MapQuestionsResponse();
+        }
+
+        private bool TestExists(int id)
+        {
+            return _context.Test.Any(e => e.Id == id);
+        }
+
     }
 }

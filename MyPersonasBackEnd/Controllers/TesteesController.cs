@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using MyPersonasBackEnd.Data;
 
 namespace MyPersonasBackEnd.Controllers
+
+    //Remember to add authentication and response codes 
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,7 +23,8 @@ namespace MyPersonasBackEnd.Controllers
         }
 
         // GET: api/Testees
-        [HttpGet]
+        [HttpGet("{username}")]
+     
         /*
          * Changed the GetTestee Method to return a list, the class converts a testee into a list implicitly
          */
@@ -39,14 +42,17 @@ namespace MyPersonasBackEnd.Controllers
         }
 
         // GET: api/Testees/5
-        [HttpGet("{id}")]
-        
-        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> GetTestee(int id) 
+        [HttpGet("{username}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+
+        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> GetTestee(string username) 
         {
             var testee = await _context.Testees.AsNoTracking()
                                                 .Include(t => t.TesteeTest)
                                                 .ThenInclude(tt => tt.Test)
-                                                .SingleOrDefaultAsync(t => t.Id == id);
+                                                .SingleOrDefaultAsync(t => t.UserName == username);
 
             if(testee == null)
             {
@@ -58,69 +64,124 @@ namespace MyPersonasBackEnd.Controllers
            
         }
 
-        // PUT: api/Testees/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> PutTestee(int id, Testee testee)
+        //Retrieving tests linked to a specific user
+        [HttpGet("{username}/test")]
+        public async Task<ActionResult<List<PersonalityProfilerDTO.TestResponse>>> GetTest(string username)
         {
-            if (id != testee.Id)
-            {
-                return BadRequest();
-            }
+            var tests = await _context.Test.AsNoTracking()
+                                           .Include(t => t.TestState)
+                                           .Include(t => t.Type)
+                                           .Include(t => t.TesteeTest)
+                                           .ThenInclude(tt => tt.Testee)
+                                           .Where(myT => myT.TesteeTest.Any(tt => tt.Testee.UserName == username))
+                                           .Select(myTQ => myTQ.MapTestResponse())
+                                           .ToListAsync();
 
-            _context.Entry(testee).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TesteeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return tests;
         }
 
-        // POST: api/Testees
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Testee>> PostTestee(Testee testee)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> Post(PersonalityProfilerDTO.TesteeResponse uinput)
         {
-            _context.Testees.Add(testee);
+            var TesteeExists = await _context.Testees
+                .Where(tt => tt.UserName == uinput.UserName)
+                .FirstOrDefaultAsync();
+
+            if(TesteeExists != null)
+            {
+                return Conflict(uinput);
+            }
+
+            var Testee = new Data.Testee
+            {
+                Name = uinput.Name,
+                Surname = uinput.Surname,
+                UserName = uinput.UserName,
+                Email = uinput.Email,
+                DOB = uinput.DOB
+            };
+
+            _context.Testees.Add(Testee);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTestee", new { id = testee.Id }, testee);
+            var output = Testee.MapTesteeResponse();
+            return CreatedAtAction("GetUser", new {username = output.UserName},output);
         }
 
-        // DELETE: api/Testees/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Testee>> DeleteTestee(int id)
+        [HttpPost("{username}/test/{testId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> AddTest(string username, int testId)
         {
-            var testee = await _context.Testees.FindAsync(id);
-            if (testee == null)
+            var mytestee = await _context.Testees.Include(t => t.TesteeTest)
+                                                 .ThenInclude(tt => tt.Test)
+                                                 .SingleOrDefaultAsync(tt => tt.UserName == username);
+
+
+            if(mytestee == null)
             {
                 return NotFound();
             }
 
-            _context.Testees.Remove(testee);
+            var mytest = await _context.Test.FindAsync(testId);
+
+            if(mytest == null)
+            {
+                return BadRequest();
+            }
+
+            mytestee.TesteeTest.Add(new TesteeTest
+            {
+                TesteeId = mytestee.Id,
+                TestId = testId
+
+            });
+
             await _context.SaveChangesAsync();
 
-            return testee;
+
+            return mytestee.MapTesteeResponse();
         }
 
-        private bool TesteeExists(int id)
+
+
+        [HttpPost("{username}/test/{testId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> DeleteTest(string username, int testId)
         {
-            return _context.Testees.Any(e => e.Id == id);
-        }*/
+            var mytestee = await _context.Testees.Include(t => t.TesteeTest)
+                                                 .SingleOrDefaultAsync(t => t.UserName == username);
+
+            if(mytestee == null)
+            {
+                return NotFound();
+            }
+
+            var mytest = await _context.Test.FindAsync(testId);
+
+            if(mytest == null)
+            {
+                return BadRequest();
+            }
+
+            var myTesteeTest = mytestee.TesteeTest.FirstOrDefault(t => t.TestId == testId);
+            mytestee.TesteeTest.Remove(myTesteeTest);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+
+
+
     }
 }
