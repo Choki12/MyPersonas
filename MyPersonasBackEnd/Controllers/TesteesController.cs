@@ -23,12 +23,10 @@ namespace MyPersonasBackEnd.Controllers
         }
 
         // GET: api/Testees
-        [HttpGet("{username}")]
-     
         /*
          * Changed the GetTestee Method to return a list, the class converts a testee into a list implicitly
          */
-        public async Task<ActionResult<IEnumerable<PersonalityProfilerDTO.TesteeResponse>>> GetTestees()
+        /*public async Task<ActionResult<IEnumerable<PersonalityProfilerDTO.TesteeResponse>>> GetTestees()
         {
             //return await _context.Testees.ToListAsync();
             
@@ -39,7 +37,7 @@ namespace MyPersonasBackEnd.Controllers
                .ToListAsync();
 
             return testee;
-        }
+        }*/
 
         // GET: api/Testees/5
         [HttpGet("{username}")]
@@ -49,8 +47,7 @@ namespace MyPersonasBackEnd.Controllers
 
         public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> GetTestee(string username) 
         {
-            var testee = await _context.Testees.AsNoTracking()
-                                                .Include(t => t.TesteeTest)
+            var testee = await _context.Testees.Include(t => t.TesteeTest)
                                                 .ThenInclude(tt => tt.Test)
                                                 .SingleOrDefaultAsync(t => t.UserName == username);
 
@@ -149,7 +146,7 @@ namespace MyPersonasBackEnd.Controllers
 
 
 
-        [HttpPost("{username}/test/{testId}")]
+        [HttpDelete("{username}/test/{testId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
