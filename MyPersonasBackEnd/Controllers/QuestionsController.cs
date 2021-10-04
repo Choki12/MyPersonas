@@ -24,7 +24,7 @@ namespace MyPersonasBackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PersonalityProfilerDTO.QuestionsResponse>>> GetQuestions()
         {
-            var questions = await _context.Questions.AsNoTracking()
+            var questions = await _context.Questions.AsTracking()
               .Include(q => q.TestQuestion)
               .ThenInclude(q => q.Questions)
               .Select(q => q.MapQuestionsResponse())
@@ -37,7 +37,7 @@ namespace MyPersonasBackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PersonalityProfilerDTO.QuestionsResponse>> GetQuestions(int id)
         {
-            var questions = await _context.Questions.AsNoTracking()
+            var questions = await _context.Questions.AsTracking()
             .Include(q => q.TestQuestion)
             .ThenInclude(q => q.Questions)
             .SingleOrDefaultAsync(q => q.Id == id);

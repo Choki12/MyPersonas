@@ -22,11 +22,13 @@ namespace MyPersonasBackEnd.Controllers
 
         // GET: api/Tests
         [HttpGet]
+
         public async Task<ActionResult<IEnumerable<PersonalityProfilerDTO.TestResponse>>> GetTest()
         {
-            var test = await _context.Test.AsNoTracking()
-                .Include(t => t.TestQuestion)
-                .ThenInclude(t => t.Test)
+            var test = await _context.Test.AsTracking()
+                //.Include(t => t.Type)
+                .Include(t => t.TesteeTest)
+                .ThenInclude(t => t.Testee)
                 .Select(t => t.MapTestResponse())
                 .ToListAsync();
 
@@ -38,7 +40,7 @@ namespace MyPersonasBackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PersonalityProfilerDTO.TestResponse>> GetTest(int id)
         {
-            var test = await _context.Test.AsNoTracking()
+            var test = await _context.Test.AsTracking()
             .Include(t => t.TestQuestion)
             .ThenInclude(t => t.Questions)
             .SingleOrDefaultAsync(t => t.Id == id);

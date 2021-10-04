@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPersonasBackEnd", "MyPersonasBackEnd\MyPersonasBackEnd.csproj", "{C386E371-55C9-4466-9E80-E95F7957B286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalityProfilerDTO", "PersonalityProfilerDTO\PersonalityProfilerDTO.csproj", "{A7302FD6-5A7F-4CE3-9919-BD0DE642D9E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalityProfilerDTO", "PersonalityProfilerDTO\PersonalityProfilerDTO.csproj", "{A7302FD6-5A7F-4CE3-9919-BD0DE642D9E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPersonasFrontEnd", "MyPersonasFrontEnd\MyPersonasFrontEnd.csproj", "{ED35105F-E172-43BE-85BE-4C2DBB7D55DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A7302FD6-5A7F-4CE3-9919-BD0DE642D9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7302FD6-5A7F-4CE3-9919-BD0DE642D9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7302FD6-5A7F-4CE3-9919-BD0DE642D9E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED35105F-E172-43BE-85BE-4C2DBB7D55DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED35105F-E172-43BE-85BE-4C2DBB7D55DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED35105F-E172-43BE-85BE-4C2DBB7D55DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED35105F-E172-43BE-85BE-4C2DBB7D55DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
