@@ -1,0 +1,16 @@
+﻿@page "{id}"
+@model MyPersonasFrontEnd.Pages.TestsModel
+@{
+    ViewData["Title"] = "Tests";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+    <h3> Test information </h3>
+</ol>
+
+
+<h2>Test was taken on date: @Model.Tests.DateTaken</h2>
+<li class="breadcrumb-item active">You have been assigned a test type: @Model.Tests.Type</li>
+<li class="breadcrumb-item active">State of Test: @Model.Tests.TestState</li>
+

@@ -22,7 +22,7 @@ namespace MyPersonasFrontEnd.Services
 
         public async Task<bool> AddTesteeAsync(Testee mytestee)
         {
-            var response = await _httpClient.PostAsJsonAsync($"/api/testee", mytestee);
+            var response = await _httpClient.PostAsJsonAsync($"/api/Testees", mytestee);
 
             if (response.StatusCode == HttpStatusCode.Conflict)
             {
@@ -41,7 +41,7 @@ namespace MyPersonasFrontEnd.Services
                 return null;
             }
 
-            var response = await _httpClient.GetAsync($"/api/testee/{name}");
+            var response = await _httpClient.GetAsync($"/api/Testees/{name}");
 
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -55,7 +55,7 @@ namespace MyPersonasFrontEnd.Services
 
         public async Task<TestResponse> GetTestAsync(int id)
         {
-            var response = await _httpClient.GetAsync($"/api/test/{id}");
+            var response = await _httpClient.GetAsync($"/api/Tests/{id}");
 
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -90,7 +90,7 @@ namespace MyPersonasFrontEnd.Services
 
         public async Task<QuestionsResponse> GetQuestionAsync(int id)
         {
-            var response = await _httpClient.GetAsync($"/api/test/{id}");
+            var response = await _httpClient.GetAsync($"/api/Questions/{id}");
 
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -104,7 +104,7 @@ namespace MyPersonasFrontEnd.Services
 
         public async Task<List<QuestionsResponse>> GetQuestionsAsync()
         {
-            var response = await _httpClient.GetAsync("/api/questions");
+            var response = await _httpClient.GetAsync("/api/Questions");
 
             response.EnsureSuccessStatusCode();
 
@@ -113,7 +113,7 @@ namespace MyPersonasFrontEnd.Services
 
         public async Task PutTestAsync(Test mytest)
         {
-            var response = await _httpClient.PutAsJsonAsync($"/api/test/{mytest.Id}", mytest);
+            var response = await _httpClient.PutAsJsonAsync($"/api/Tests/{mytest.Id}", mytest);
 
             response.EnsureSuccessStatusCode();
         }
@@ -121,21 +121,21 @@ namespace MyPersonasFrontEnd.Services
 
         public async Task AddTestToTesteeAsync(string name, int testId)
         {
-            var response = await _httpClient.PostAsync($"/api/testee/{name}/test/{testId}", null);
+            var response = await _httpClient.PostAsync($"/api/Testees/{name}/Tests/{testId}", null);
 
             response.EnsureSuccessStatusCode();
         }
 
         public async Task DeleteTestFromTesteeAsync(string name, int testId)
         {
-            var response = await _httpClient.DeleteAsync($"/api/attendees/{name}/session/{testId}");
+            var response = await _httpClient.DeleteAsync($"/api/Testees/{name}/Tests/{testId}");
 
             response.EnsureSuccessStatusCode();
         }
 
         public async Task<List<TestResponse>> GetTestByTesteeAsync(string name)
         {
-            var response = await _httpClient.GetAsync($"/api/testee/{name}/test");
+            var response = await _httpClient.GetAsync($"/api/Testees/{name}/Tests");
 
             response.EnsureSuccessStatusCode();
 
@@ -145,7 +145,7 @@ namespace MyPersonasFrontEnd.Services
 
         public async Task<List<TesteeResponse>> GetTesteesAsync()
         {
-            var response = await _httpClient.GetAsync("/api/testees");
+            var response = await _httpClient.GetAsync("/api/Testees");
 
             response.EnsureSuccessStatusCode();
 
@@ -155,7 +155,7 @@ namespace MyPersonasFrontEnd.Services
         public async Task PutQuestionsAsync(Questions myquestions)
         {
 
-            var response = await _httpClient.PutAsJsonAsync($"/api/questions/{myquestions.Id}", myquestions);
+            var response = await _httpClient.PutAsJsonAsync($"/api/Questions/{myquestions.Id}", myquestions);
 
             response.EnsureSuccessStatusCode();
         }

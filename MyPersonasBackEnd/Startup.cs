@@ -49,6 +49,7 @@ namespace MyPersonasBackEnd
 
 
             services.AddControllers();
+            
 
             /* Generate Swagger documents for our API in browser*/
             services.AddSwaggerGen(options => {

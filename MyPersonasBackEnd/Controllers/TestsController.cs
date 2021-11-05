@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPersonasBackEnd.Data;
+using PersonalityProfilerDTO;
 
 namespace MyPersonasBackEnd.Controllers
 {
@@ -23,7 +24,7 @@ namespace MyPersonasBackEnd.Controllers
         // GET: api/Tests
         [HttpGet]
 
-        public async Task<ActionResult<IEnumerable<PersonalityProfilerDTO.TestResponse>>> GetTest()
+        public async Task<ActionResult<List<TestResponse>>> GetTest()
         {
             var test = await _context.Test.AsTracking()
                 //.Include(t => t.Type)
@@ -38,7 +39,7 @@ namespace MyPersonasBackEnd.Controllers
 
         // GET: api/Tests/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PersonalityProfilerDTO.TestResponse>> GetTest(int id)
+        public async Task<ActionResult<TestResponse>> GetTest(int id)
         {
             var test = await _context.Test.AsTracking()
             .Include(t => t.TestQuestion)
@@ -77,7 +78,7 @@ namespace MyPersonasBackEnd.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<PersonalityProfilerDTO.TestResponse>> PostTest(PersonalityProfilerDTO.Test tinput)
+        public async Task<ActionResult<TestResponse>> PostTest(PersonalityProfilerDTO.Test tinput)
         {
             var mytest = new Data.Test
             {
@@ -97,7 +98,7 @@ namespace MyPersonasBackEnd.Controllers
 
         // DELETE: api/Tests/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonalityProfilerDTO.TestResponse>> DeleteTest(int id)
+        public async Task<ActionResult<TestResponse>> DeleteTest(int id)
         {
             var test = await _context.Test.FindAsync(id);
             if (test == null)

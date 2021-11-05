@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPersonasBackEnd.Data;
+using PersonalityProfilerDTO;
 
 namespace MyPersonasBackEnd.Controllers
 
@@ -45,7 +46,7 @@ namespace MyPersonasBackEnd.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
 
-        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> GetTestee(string username) 
+        public async Task<ActionResult<TesteeResponse>> GetTestee(string username) 
         {
             var testee = await _context.Testees.Include(t => t.TesteeTest)
                                                 .ThenInclude(tt => tt.Test)
@@ -63,7 +64,7 @@ namespace MyPersonasBackEnd.Controllers
 
         //Retrieving tests linked to a specific user
         [HttpGet("{username}/test")]
-        public async Task<ActionResult<List<PersonalityProfilerDTO.TestResponse>>> GetTest(string username)
+        public async Task<ActionResult<List<TestResponse>>> GetTest(string username)
         {
             var tests = await _context.Test.AsNoTracking()
                                            .Include(t => t.TestState)
@@ -80,7 +81,7 @@ namespace MyPersonasBackEnd.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> Post(PersonalityProfilerDTO.TesteeResponse uinput)
+        public async Task<ActionResult<TesteeResponse>> Post(PersonalityProfilerDTO.TesteeResponse uinput)
         {
             var TesteeExists = await _context.Testees
                 .Where(tt => tt.UserName == uinput.UserName)
@@ -112,7 +113,7 @@ namespace MyPersonasBackEnd.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<PersonalityProfilerDTO.TesteeResponse>> AddTest(string username, int testId)
+        public async Task<ActionResult<TesteeResponse>> AddTest(string username, int testId)
         {
             var mytestee = await _context.Testees.Include(t => t.TesteeTest)
                                                  .ThenInclude(tt => tt.Test)

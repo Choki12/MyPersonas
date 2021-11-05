@@ -4,13 +4,19 @@
     ViewData["Title"] = "Home page";
 }
 
+
 <div class="tests">
     <h1> My available tests on @System.DateTime.Now.Year</h1>
     @if (Model.Tests == null)
     {
         <div class="tests">
-            <h2>No tests available as yet</h2>
+            <h3>Welcome!</h3>
+            <a href="/TestList">View Tests</a>
+            <a href=" /Testee">View Testees</a>
+            <a href="/"> TakeTest</a>
         </div>
+
+        
     }
 
     else
@@ -22,9 +28,17 @@
             <ul>
                 @foreach (var test in tests)
                 {
-                    <li>@test</li>
-                }
-            </ul>
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow session h-100">
+                            <div class="card-header">@test.DateTaken</div>
+                            </div>
+                        </div>
+                    <li>
+                        <p>View test</p>
+                        <a asp-page="Test" asp-route-id="@test.Id">@test.Type</a>
+                    </li>
+                    }
+                </ul>
         }
     }
 

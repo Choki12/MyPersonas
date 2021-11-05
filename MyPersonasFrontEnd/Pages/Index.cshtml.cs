@@ -24,7 +24,7 @@ namespace MyPersonasFrontEnd.Pages
             _logger = logger;
         }
 
-        public IEnumerable<IGrouping<Test,TestResponse>> Tests{get; set;} //assign a unique id for each test
+        public IEnumerable<IGrouping<Test,TestResponse>> Tests {get; set;} //assign a unique id for each test
 
         public IEnumerable<IGrouping<Questions, QuestionsResponse>> Questions { get; set; }
 
@@ -33,26 +33,29 @@ namespace MyPersonasFrontEnd.Pages
 
         public int QuestionsLeft { get; set; }
 
-        public async Task OnGet(int qLeft = 0)
+        public async Task OnGet()
         {
 
             var tests = await _apiClient.GetTestsAsync();
 
             var questions = await _apiClient.GetQuestionsAsync();
 
-            var initialTestDate = tests.Min(t => t.DateTaken);
+            //var initialTestDate = tests.Min(t => t.DateTaken);
 
-            var testType = tests.Select(t => t.Type);
+            //var testType = tests.Select(t => t.Type);
 
-            QuestionsLeft = qLeft;
+            //QuestionsLeft = qLeft;
 
             var question = questions.Where(t => t.Number >= 1)
                                             .OrderBy(t => t.Number);
 
 
-            var myTests = tests.Select(ts => ts.Questions)
-                               .GroupBy(ts => ts)
-                               .ToList();
+            var myTests = tests.ToList();
+
+           
+                         
+                         
+
 
 
 
