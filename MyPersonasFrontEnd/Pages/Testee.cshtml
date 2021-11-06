@@ -9,19 +9,19 @@
     <li class="breadcrumb-item active">Testee name: @Model.Testee.Name</li>
 </ol>
 
-<h2>@Model.Testee.Name</h2>
 
-
-<div >
-    <h3>
-        Testee info:<h3>
-            <>Username: @Model.Testee.UserName</>
-            <p>Name: @Model.Testee.Name</p>
-            <p>Surname: @Model.Testee.Surname</p>
-            <p>Date of Birth: @Model.Testee.DOB</p>
+<div class="Testee">
+ <h3 style="text-align:center">Testee details</h3>
+ <ul class="list-group list-group-flush">
+     <li class="list-group-item"><b>Testee name:</b> @Model.Testee.Name</li>
+     <li class="list-group-item"><b>Username:</b> @Model.Testee.UserName</li>
+     <li class="list-group-item"><b>Name:</b> @Model.Testee.Name</li>
+     <li class="list-group-item"><b>Surname:</b> @Model.Testee.Surname</li>
+     <li class="list-group-item"><b>Date of Birth:</b> @Model.Testee.DOB</li>
+ </ul>
 </div>
 
-<h3>View tests for this testee</h3>
+ <li class="list-group-item">View tests linked to this testee</li>
 <div class="row">
     <div class="col-md-5">
         <ul class="list-group">

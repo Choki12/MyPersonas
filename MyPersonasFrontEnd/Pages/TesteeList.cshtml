@@ -1,0 +1,31 @@
+﻿@page
+@model MyPersonasFrontEnd.Pages.TesteeListModel
+@{
+}
+
+<h1>Testees</h1>
+
+
+
+<div class="test-list" font-size="5">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><p font-size="10" font-weight="bold"><b>Username</b> &nbsp;<b>Name</b> &nbsp; <b>Surname</b> &nbsp; <b>Assigned Test ID </b></p></li>
+    </ul>
+
+    @foreach (var testee in Model.Testees)
+    {
+        <ul class="list-group list-group-flush">
+            @foreach (var t in testee.Test)
+            {
+
+                <li class="list-group-item"><a asp-page="Testees" asp-route-id="@testee.UserName">@testee.Name&nbsp;</a>@testee.Surname &nbsp; 
+            @t.Id</li>
+            }
+        </ul>
+
+
+
+
+    }
+
+</div>

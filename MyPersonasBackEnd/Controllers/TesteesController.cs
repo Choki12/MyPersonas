@@ -27,18 +27,24 @@ namespace MyPersonasBackEnd.Controllers
         /*
          * Changed the GetTestee Method to return a list, the class converts a testee into a list implicitly
          */
-        /*public async Task<ActionResult<IEnumerable<PersonalityProfilerDTO.TesteeResponse>>> GetTestees()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TesteeResponse>>> GetTestees()
         {
             //return await _context.Testees.ToListAsync();
             
-            var testee = await _context.Testees.AsNoTracking()
+            var testee = await _context.Testees.AsTracking()
                .Include(t => t.TesteeTest)
                .ThenInclude(tt => tt.Test)
                .Select(t => t.MapTesteeResponse())
                .ToListAsync();
 
+            if (testee == null)
+            {
+                return NotFound();
+            }
+
             return testee;
-        }*/
+        }
 
         // GET: api/Testees/5
         [HttpGet("{username}")]
@@ -81,7 +87,7 @@ namespace MyPersonasBackEnd.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<TesteeResponse>> Post(PersonalityProfilerDTO.TesteeResponse uinput)
+        public async Task<ActionResult<TesteeResponse>> Post(TesteeResponse uinput)
         {
             var TesteeExists = await _context.Testees
                 .Where(tt => tt.UserName == uinput.UserName)
