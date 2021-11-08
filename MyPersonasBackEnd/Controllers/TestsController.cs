@@ -11,12 +11,12 @@ using PersonalityProfilerDTO;
 namespace MyPersonasBackEnd.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class TestsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public TestsController(ApplicationDbContext context)
+        public TestsController(ApplicationDbContext context)  
         {
             _context = context;
         }

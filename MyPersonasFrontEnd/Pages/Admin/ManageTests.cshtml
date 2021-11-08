@@ -1,0 +1,43 @@
+﻿@page "{id}"
+@model ManageTestsModel
+@{
+}
+
+<h3>Edit Tests</h3>
+
+@if (Model.ShowMessage)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>   </button>
+        @Model.Message
+    </div>
+}
+
+<form method="post" class="form-horizontal">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input asp-for="Tests.Id" type="hidden" />
+    <div class="form-group">
+        <label class="col-md-2 control-label">Test Date</label>
+        <div class="col-md-10">
+            <textarea asp-for="Tests.DateTaken" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Test Type</label>
+        <div class="col-md-10">
+            <textarea asp-for="Tests.Type" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">State of Test</label>
+        <div class="col-md-10">
+            <input asp-for="Tests.TestState" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" asp-page-handler="Delete" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</form>

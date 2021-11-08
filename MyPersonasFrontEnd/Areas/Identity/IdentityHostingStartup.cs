@@ -16,12 +16,17 @@ namespace MyPersonasFrontEnd.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<IdentityDbContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("IdentityDbContextConnection")));
+                    options.UseSqlite("Data Source=mysecurity.db"));
 
-                services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<IdentityDbContext>();
+            
+
+
+                services.AddDefaultIdentity<User>()
+                        .AddEntityFrameworkStores<IdentityDbContext>()
+                        .AddClaimsPrincipalFactory<ClaimsPrincipalFactory>();
             });
+
+
         }
     }
 }

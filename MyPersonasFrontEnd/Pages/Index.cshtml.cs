@@ -6,6 +6,7 @@ using PersonalityProfilerDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MyPersonasFrontEnd.Pages
@@ -16,13 +17,15 @@ namespace MyPersonasFrontEnd.Pages
 
         protected readonly IApiClient _apiClient;
 
-  
+        public bool IsAdmin { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, IApiClient apiClient)
         {
             _apiClient = apiClient;
             _logger = logger;
         }
+
+        public Test myt;
 
         public IEnumerable<IGrouping<Test,TestResponse>> Tests {get; set;} //assign a unique id for each test
 
@@ -35,6 +38,7 @@ namespace MyPersonasFrontEnd.Pages
 
         public async Task OnGet()
         {
+            IsAdmin = User.IsAdmin();
 
             var tests = await _apiClient.GetTestsAsync();
 

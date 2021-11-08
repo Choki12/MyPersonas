@@ -24,7 +24,23 @@ namespace MyPersonasFrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Admin", "Admin");
+            });
+
+
+            services.AddSingleton<IAdminService, AdminService>();
+
+            //added authorization policy for admin, uses claim to verify if required admin has required claim
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy =>
+                {
+                    policy.RequireAuthenticatedUser()
+                          .RequireIsAdminClaim();
+                });
+            });
 
             services.AddHttpClient<IApiClient, ApiClient>(client =>
             {
@@ -50,7 +66,7 @@ namespace MyPersonasFrontEnd
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();// added authentication 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

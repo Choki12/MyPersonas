@@ -6,21 +6,24 @@
 
 
 <div class="tests">
-    
+
     @if (Model.Tests == null)
     {
-    <div class="tests">
-        <h1 style="text-align:center">Welcome to MyPersonas!</h1>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><a href="/"> Take a Personality Test</a></li>
-            <li class="list-group-item"><a href="/TestList">View Tests</a></li>
-            <li class="list-group-item"><a href=" /TesteeList">View Testees</a></li>
+        <div class="tests">
+            <h1 style="text-align:center">Welcome to MyPersonas!</h1>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a asp-page="/StartTest"> Take a Personality Test</a></li>
+                <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/TestList"> View Tests</a></li>
+                <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/TesteeList">View Testees</a></li>
+                <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/ManageTests">Manage Tests</a></li>
 
-        </ul>
+            </ul>
 
-    </div>
+        </div>
 
-        
+
+
+
     }
 
     else
@@ -35,16 +38,37 @@
                     <div class="col-md-3 mb-4">
                         <div class="card shadow session h-100">
                             <div class="card-header">@test.DateTaken</div>
-                            </div>
                         </div>
+                    </div>
                     <li>
                         <p>View test</p>
                         <a asp-page="Test" asp-route-id="@test.Id">@test.Type</a>
                     </li>
-                    }
-                </ul>
+                }
+            </ul>
         }
+
+        <div class="card-footer">
+            <ul class="list-inline mb-0">
+                @foreach (var tests in Model.Tests)
+                {
+                    @foreach (var tt in tests)
+                    {
+                        @foreach (var tst in tt.Testees)
+                        {
+                            <li class="list-inline-item">
+                                <a asp-page="Testee" asp-route-id="@tst.Id">@tst.Name</a>
+                            </li>
+                        }
+
+                    }
+
+                }
+                <a authz-policy="Admin" asp-page="/Admin/ManageTests" class="btn btn-default btn-xs">Manage Tests</a>
+            </ul>
+        </div>
     }
+
 
 
 </div>
