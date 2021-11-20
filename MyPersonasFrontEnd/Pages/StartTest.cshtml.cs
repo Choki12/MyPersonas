@@ -26,12 +26,18 @@ namespace MyPersonasFrontEnd.Pages
         {
 
             var myQ = await _apiClient.GetQuestionsAsync();
+
+            if (myQ == null)
+            {
+                RedirectToPage("/Index");
+            }
+
             questions = new Questions
             {
-                Id = 4566,
-                Question = "What is your favourite Pastime?",
-                State = "Incomplete",
-                Number = 1,
+                Id = questions.Id,
+                Question = questions.Question,
+                State = questions.State,
+                Number = questions.Number
                
             };
         }

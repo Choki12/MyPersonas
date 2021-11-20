@@ -23,15 +23,17 @@ namespace MyPersonasFrontEnd.Pages
         public ManageTestsModel(IApiClient apiClient)
         {
             _apiClient = apiClient;
-
-
         }
-
-
 
         public async Task OnGet(int id)
         {
             var mytest = await _apiClient.GetTestAsync(id);
+
+            if(mytest == null)
+            {
+                RedirectToPage("/Index");
+            }
+
             Tests = new Test
             {
                 Id = mytest.Id,
@@ -49,9 +51,11 @@ namespace MyPersonasFrontEnd.Pages
                 return Page();
             }
 
-            Message = "Test successfully updated";
+            
 
             await _apiClient.PutTestAsync(Tests);
+
+            Message = "Test successfully updated";
 
             return Page();
         }

@@ -1,4 +1,4 @@
-﻿@page "{name}"
+﻿@page "Testee/{name}"
 @model MyPersonasFrontEnd.Pages.TesteeModel
 @{
 
@@ -27,7 +27,7 @@
         <ul class="list-group">
             @foreach (var test in Model.Testee.Test)
             {
-                <li class="list-group-item"><a asp-page="Test" asp-route-id="@test.Id">@test.Type</a></li>
+                <li class="list-group-item"><a asp-page="Tests" asp-route-id="@test.Id">@test.Type</a></li>
             }
         </ul>
     </div>

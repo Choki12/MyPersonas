@@ -15,23 +15,23 @@
 
 <form method="post" class="form-horizontal">
     <div asp-validation-summary="All" class="text-danger"></div>
-    <input asp-for="Tests.Id" type="hidden" />
+    <input asp-for="@Model.Tests.Id" type="hidden" />
     <div class="form-group">
         <label class="col-md-2 control-label">Test Date</label>
         <div class="col-md-10">
-            <textarea asp-for="Tests.DateTaken" class="form-control"></textarea>
+            <textarea asp-for="@Model.Tests.DateTaken" class="form-control"></textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">Test Type</label>
         <div class="col-md-10">
-            <textarea asp-for="Tests.Type" class="form-control"></textarea>
+            <textarea asp-for="@Model.Tests.Type" class="form-control"></textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">State of Test</label>
         <div class="col-md-10">
-            <input asp-for="Tests.TestState" class="form-control" />
+            <input asp-for="@Model.Tests.TestState" class="form-control" />
         </div>
     </div>
     <div class="form-group">
