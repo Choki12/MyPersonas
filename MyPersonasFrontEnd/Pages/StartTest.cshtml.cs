@@ -16,7 +16,7 @@ namespace MyPersonasFrontEnd.Pages
         [BindProperty]
         public Questions questions { get; set; }
 
-        public IEnumerable<IGrouping<Questions, QuestionsResponse>> quest { get; set; }
+        public List <QuestionsResponse> quest { get; set; }
 
         public StartTestModel(IApiClient apiClient)
         {
@@ -27,19 +27,26 @@ namespace MyPersonasFrontEnd.Pages
 
             var myQ = await _apiClient.GetQuestionsAsync();
 
+            quest = await _apiClient.GetQuestionsAsync();
+            
             if (myQ == null)
             {
                 RedirectToPage("/Index");
             }
 
-            questions = new Questions
+            foreach(var q in myQ)
             {
-                Id = questions.Id,
-                Question = questions.Question,
-                State = questions.State,
-                Number = questions.Number
-               
-            };
+                
+                questions = new Questions
+                {
+                    Id = q.Id,
+                    Question = q.Question,
+                    State = q.State,
+                    Number = q.Number
+
+                };
+            }
+          
         }
 
         public async Task<IActionResult> OnPostAsync()

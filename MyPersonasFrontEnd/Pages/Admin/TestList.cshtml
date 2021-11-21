@@ -5,26 +5,33 @@
 }
 <h1>Tests</h1>
 
+<style type="text/css">
+    .stylish-button {
+        -webkit-box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        -moz-box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        color: #333;
+        background-color: #FA2;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 4px 16px;
+        text-shadow: #FE6 0 1px 0
+    }
+</style>
+<div class="row">
+    <div class="test-list" font-size="5">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><p font-size="10" font-weight="bold"><b>Test ID</b> &nbsp;<b>Test Type</b> &nbsp; <b>Test State</b></p></li>
 
-
-<div class="test-list" font-size="5">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><p font-size="10" font-weight="bold">Test Id &nbsp;Test Type &nbsp; State of Test</p></li>
-    </ul>
-
-        @foreach (var test in Model.Tests)
-        {
-            <ul class="list-group list-group-flush">
-                @foreach (var type in test.Type)
-                {
-
-                    <li class="list-group-item"><a asp-page="/Tests" asp-route-id="@test.Id">@test.Id &nbsp;</a>@test.Type &nbsp; @test.TestState</li>
-                }
-            </ul>
-
-
-
-
-        }
-
+            @foreach (var test in Model.Tests)
+            {
+                <li class="list-group-item"><a asp-page="/Tests" asp-route-id="@test.Id">@test.Id &nbsp;</a>@test.Type &nbsp; @test.TestState &nbsp; <a asp-page="/Tests" asp-route-id="@test.Id" class="stylish-button">View data</a></li>
+                
+            }
+        </ul>
+    </div>
 </div>

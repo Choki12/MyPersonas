@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MyPersonasFrontEnd.Pages.Admin
+namespace MyPersonasFrontEnd.Pages
 {
-    public class InputTestIDModel : PageModel
+    public class ResultsModel : PageModel
     {
         public void OnGet()
         {

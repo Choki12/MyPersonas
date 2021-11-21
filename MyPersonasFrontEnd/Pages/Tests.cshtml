@@ -8,8 +8,10 @@
     <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
 </ol>
 
-<h3> Test data </h3>
-<li class="breadcrumb-item active">You have been assigned a test type: @Model.Tests.Type</li>
-<li class="breadcrumb-item active">State of Test: @Model.Tests.TestState</li>
-<li class="breadcrumb-item active">Test was taken on date: @Model.Tests.DateTaken</li>
-
+<h3 style="text-align:center"> Test data </h3>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">You have been assigned a test type: <b>@Model.Tests.Type</b></li>
+    <li class="list-group-item">State of Test: <b>@Model.Tests.TestState </b></li>
+    <li class="list-group-item">Test was taken on date: <b>@Model.Tests.DateTaken</b></li>
+    <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/ManageTests" asp-route-id=@Model.Tests.Id><b>Manage Test</b></a></li>
+</ul>
