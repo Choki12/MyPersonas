@@ -1,11 +1,11 @@
-﻿@page "Testee/{name}"
+﻿@page "{name}"
 @model MyPersonasFrontEnd.Pages.TesteeModel
 @{
 
 }
 
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a asp-page="/Tests">Testees (For admin)</a></li>
+    <li class="breadcrumb-item"><a asp-page="/Tests">Testees </a></li>
     <li class="breadcrumb-item active">Testee name: @Model.Testee.Name</li>
 </ol>
 
@@ -13,22 +13,20 @@
 <div class="Testee">
  <h3 style="text-align:center">Testee details</h3>
  <ul class="list-group list-group-flush">
-     <li class="list-group-item"><b>Testee name:</b> @Model.Testee.Name</li>
-     <li class="list-group-item"><b>Username:</b> @Model.Testee.UserName</li>
      <li class="list-group-item"><b>Name:</b> @Model.Testee.Name</li>
      <li class="list-group-item"><b>Surname:</b> @Model.Testee.Surname</li>
      <li class="list-group-item"><b>Date of Birth:</b> @Model.Testee.DOB</li>
+     <li class="list-group-item"><b>Username:</b> @Model.Testee.UserName</li>
+     <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/ManageTesteescshtml" asp-route-id="@Model.Testee.UserName"><b>Manage Testee</b></a></li>
  </ul>
 </div>
 
- <li class="list-group-item">View tests linked to this testee</li>
+
 <div class="row">
-    <div class="col-md-5">
-        <ul class="list-group">
-            @foreach (var test in Model.Testee.Test)
-            {
-                <li class="list-group-item"><a asp-page="Tests" asp-route-id="@test.Id">@test.Type</a></li>
-            }
+    <ul class="list-group">
+        @foreach (var test in Model.Testee.Test)
+        {
+            <li class="list-group-item"><a asp-page="Tests" asp-route-id="@test.Id"> Tests linked to this testee:&nbsp; <b>@test.Type</b></a></li>
+        }
         </ul>
-    </div>
 </div>

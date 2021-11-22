@@ -4,33 +4,33 @@
 }
 
 <h1>Testees</h1>
-
+<style type="text/css">
+    .stylish-button {
+        -webkit-box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        -moz-box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        color: #333;
+        background-color: #FA2;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 4px 16px;
+        text-shadow: #FE6 0 1px 0
+    }
+</style>
 
 
 <div class="row" font-size="5">
     <div class="col-md-8">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><p font-size="10" font-weight="bold"><b>Username</b> &nbsp;<b>Name</b> &nbsp; <b>Surname</b> &nbsp; <b>Assigned Test ID </b></p></li>
-        </ul>
-
-        <div class="row">
+            <li class="list-group-item"><p font-size="10" font-weight="bold"><b>Name</b> &nbsp; <b>Surname</b> &nbsp; <b>Email</b>  &nbsp; <b>DOB</b></p></li>
             @foreach (var testee in Model.Testees)
             {
-                <ul class="list-group list-group-flush">
-                    @foreach (var t in testee.Test)
-                    {
-
-                        <li class="list-group-item">
-                            <a asp-page="Testee" asp-route-id="@testee.Id"></a> @testee.Name&nbsp;@testee.Surname &nbsp;
-                            @t.Id
-                        </li>
-                    }
-                </ul>
-
-
-
-
+                <li class="list-group-item"> @testee.Name &nbsp;@testee.Surname &nbsp; @testee.Email &nbsp; @testee.DOB <a asp-page="/Testee" asp-route-id="@testee.UserName" class="stylish-button">View data</a></li>
             }
-        </div>
+        </ul>
     </div>
    </div>

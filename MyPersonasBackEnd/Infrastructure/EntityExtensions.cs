@@ -19,7 +19,8 @@ namespace MyPersonasBackEnd.Data
                 Surname = testee.Surname,
                 Email = testee.Email,
                 DOB = testee.DOB,
-                Test = testee.TesteeTest?
+                UserName = testee.UserName,
+                Test = testee.TesteeTest?       
                 .Select(tt =>
                     new PersonalityProfilerDTO.Test
                     {
@@ -51,7 +52,8 @@ namespace MyPersonasBackEnd.Data
                        Email = tt.Testee.Email,
                        Name = tt.Testee.Name,
                        Surname = tt.Testee.Surname,
-                       DOB = tt.Testee.DOB
+                       DOB = tt.Testee.DOB,
+                       UserName = tt.UserName
 
                    })
                .ToList()

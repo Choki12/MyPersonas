@@ -118,6 +118,13 @@ namespace MyPersonasFrontEnd.Services
             response.EnsureSuccessStatusCode();
         }
 
+        public async Task PutTesteeAsync(Testee mytestee)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"/api/Testees/{mytestee.UserName}", mytestee);
+
+            response.EnsureSuccessStatusCode();
+        }
+
 
         public async Task AddTestToTesteeAsync(string name, int testId)
         {

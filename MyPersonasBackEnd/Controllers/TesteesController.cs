@@ -56,7 +56,7 @@ namespace MyPersonasBackEnd.Controllers
         {
             var testee = await _context.Testees.Include(t => t.TesteeTest)
                                                 .ThenInclude(tt => tt.Test)
-                                                .SingleOrDefaultAsync(t => t.UserName == username);
+                                                .SingleAsync(t => t.UserName == username);
 
             if(testee == null)
             {
@@ -66,6 +66,26 @@ namespace MyPersonasBackEnd.Controllers
             return testee.MapTesteeResponse();
 
            
+        }
+
+        [HttpPut("{username}")]
+        public async Task<IActionResult> PutTestee(string name, PersonalityProfilerDTO.Testee tinput)
+        {
+            var mytestee = await _context.Testees.FindAsync(name);
+            if (mytestee == null)
+            {
+                return NotFound();
+            }
+
+            mytestee.Id = tinput.Id;
+            mytestee.UserName = tinput.UserName;
+            mytestee.Email = tinput.Email;
+            mytestee.DOB = tinput.DOB;
+            mytestee.Name = tinput.Name;
+            mytestee.Surname = tinput.Surname;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         //Retrieving tests linked to a specific user

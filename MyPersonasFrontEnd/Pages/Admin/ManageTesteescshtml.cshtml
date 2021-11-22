@@ -1,0 +1,58 @@
+﻿@page "{name}"
+@model MyPersonasFrontEnd.Pages.Admin.ManageTesteescshtmlModel
+@{
+}
+
+<h3 style="text-align:center">Edit Testees</h3>
+
+@if (Model.ShowMessage)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>   </button>
+        @Model.Message
+    </div>
+}
+
+<form method="post" class="form-horizontal">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input asp-for="@Model.Testees.Id" type="hidden" />
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Name</b></label>
+        <div class="col-md-10">
+            <textarea asp-for="@Model.Testees.Name" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Surname</b></label>
+        <div class="col-md-10">
+            <textarea asp-for="@Model.Testees.Surname" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Date of Birth</b></label>
+        <div class="col-md-10">
+            <input type="date" asp-for="@Model.Testees.DOB" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Email Address</b></label>
+        <div class="col-md-10">
+            <input asp-for="@Model.Testees.Email" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>User Name</b></label>
+        <div class="col-md-10">
+            <input asp-for="@Model.Testees.UserName" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" asp-page-handler="Delete" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</form>

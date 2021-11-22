@@ -13,6 +13,7 @@ namespace MyPersonasFrontEnd.Pages
     {
         private readonly IApiClient _apiClient;
 
+
         [BindProperty]
         public Questions questions { get; set; }
 
@@ -42,9 +43,11 @@ namespace MyPersonasFrontEnd.Pages
                     Id = q.Id,
                     Question = q.Question,
                     State = q.State,
-                    Number = q.Number
-
+                    Number = q.Number,
+                    
                 };
+
+                
             }
           
         }
