@@ -17,7 +17,7 @@ namespace MyPersonasFrontEnd.Pages
         [BindProperty]
         public Questions questions { get; set; }
 
-        public List <QuestionsResponse> quest { get; set; }
+        public List<QuestionsResponse> quest { get; set; } = new List<QuestionsResponse>();
 
         public StartTestModel(IApiClient apiClient)
         {

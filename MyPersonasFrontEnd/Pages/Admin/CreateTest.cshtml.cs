@@ -40,7 +40,7 @@ namespace MyPersonasFrontEnd.Pages.Admin
 
             await _apiClient.PostTestAsync(Tests);
 
-            Message = "Successfully created new user";
+            Message = "Successfully created new test";
 
             return Page();
         }

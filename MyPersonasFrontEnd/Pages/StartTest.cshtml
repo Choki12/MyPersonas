@@ -12,7 +12,7 @@
 
 <h3>Start Test</h3>
 
-<form method="post" class="form-horizontal">
+<EditForm Model ="@Model" form method="post" class="form-horizontal">
     @foreach (var q in Model.quest)
     {
         counter = counter + 1;
@@ -37,14 +37,14 @@
     }
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit"  class="btn btn-primary">Submit</button>
 
         </div>
     </div>
 
 
 
-</form>
+</EditForm>
 
 
 

@@ -2,3 +2,54 @@
 @model MyPersonasFrontEnd.Pages.Admin.CreateTesteeModel
 @{
 }
+
+<h3 style="text-align:center">Create Testee</h3>
+
+@if (Model.ShowMessage)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>   </button>
+        @Model.Message
+    </div>
+}
+
+<EditForm Model="@Model" form method="post" class="form-horizontal">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input bind="@Model.Testees.Id" type="hidden" readonly />
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Name</b></label>
+        <div class="col-md-10">
+            <input bind="@Model.Testees.Name" class="form-control" placeholder="Enter Name" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Surname</b></label>
+        <div class="col-md-10">
+            <textarea class="form-control" bind="@Model.Testees.Surname" placeholder="Enter Surname"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Date of Birth</b></label>
+        <div class="col-md-10">
+            <input class="form-control" type="date" bind="@Model.Testees.DOB" placeholder="Enter Date of Birth" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Email</b></label>
+        <div class="col-md-10">
+            <input class="form-control" bind="@Model.Testees.Email" placeholder="Enter Email" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label"><b>Username</b></label>
+        <div class="col-md-10">
+            <input class="form-control" bind="@Model.Testees.UserName" placeholder="Enter UserName" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Create testee</button>
+        </div>
+    </div>
+</EditForm>
+
