@@ -167,6 +167,20 @@ namespace MyPersonasFrontEnd.Services
             response.EnsureSuccessStatusCode();
         }
 
+        public async Task PostTestAsync(Test mytest)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"/api/Tests/", mytest);
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task PostTesteeAsync(Testee mytestee)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"/api/Testees/", mytestee);
+
+            response.EnsureSuccessStatusCode();
+        }
+
         /*public async Task<bool> CheckHealthAsync()
         {
             try

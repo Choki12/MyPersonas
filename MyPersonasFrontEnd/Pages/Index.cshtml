@@ -13,9 +13,11 @@
             <h1 style="text-align:center">Welcome to MyPersonas!</h1>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a asp-page="/StartTest"> Take a Personality Test</a></li>
+                <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/CreateTest">Create Test</a></li>
+                <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/CreateTestee">Create Testee</a></li>
                 <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/TestList"> View Tests</a></li>
                 <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/TesteeList">View Testees</a></li>
-                
+
 
             </ul>
 
