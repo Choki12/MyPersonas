@@ -70,6 +70,22 @@ namespace MyPersonasBackEnd.Controllers
             return NoContent();
         }
 
+       /* [HttpPut("{id}")]
+        public async Task<IActionResult> PutAnswer(int id, PersonalityProfilerDTO.Questions qinput)
+        {
+            var myquestions = await _context.Questions.FindAsync(id);
+            if (myquestions == null)
+            {
+                return NotFound();
+            }
+
+            myquestions.Answer = qinput.Answer;
+
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }*/
+
 
         [HttpPost]
         public async Task<ActionResult<QuestionsResponse>> PostTest(PersonalityProfilerDTO.Questions qinput)
@@ -95,7 +111,7 @@ namespace MyPersonasBackEnd.Controllers
 
         // DELETE: api/Tests/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<QuestionsResponse>> DeleteTest(int id)
+        public async Task<ActionResult<QuestionsResponse>> DeleteQuestion(int id)
         {
             var question = await _context.Questions.FindAsync(id);
             if (question == null)

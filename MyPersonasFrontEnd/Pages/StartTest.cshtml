@@ -1,6 +1,8 @@
-﻿@page 
+﻿@page
+
 
 @model StartTestModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
 
     int counter = 0;
@@ -8,43 +10,54 @@
     string rdgAgreeID = "Agree";
     string rdgDisagreeID = "Disagree";
     string rdgNeutralID = "Neutral";
+
+    void DirectToResults()
+    {
+        RedirectToPage("/Results");
+    }
+
+
 }
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+</ol>
 
 <h3>Start Test</h3>
 
-<EditForm Model ="@Model" form method="post" class="form-horizontal">
+<form method="post" class="form-horizontal">
     @foreach (var q in Model.quest)
     {
         counter = counter + 1;
         rdgname = "Choice" + counter.ToString();
-        rdgAgreeID += counter.ToString();
-        rdgDisagreeID += counter.ToString();
-        rdgNeutralID += counter.ToString();
+        rdgAgreeID = "Agree" + counter.ToString();
+        rdgDisagreeID = "Disagree" + counter.ToString();
+        rdgNeutralID = "Neutral" + counter.ToString();
 
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="form-group">
             <label class="row">@q.Number<text>.</text>&nbsp; @q.Question</label>
-            <input type="radio" id=@rdgDisagreeID name=@rdgname value="Disagree" bind="@q.Answer">
+            <input type="radio" asp-for="questions.Answer" id=@rdgDisagreeID name=@rdgname value="Disagree" bind-Value="@q.Answer">
             <label for="QDisagree">Disagree</label><br>
-            <input type="radio" id=@rdgNeutralID name=@rdgname value="Neutral" bind="@q.Answer">
+            <input type="radio" asp-for="questions.Answer" id=@rdgNeutralID name=@rdgname value="Neutral" bind-Value="@q.Answer">
             <label for="QNeutral">Neutral</label><br>
-            <input type="radio" id=@rdgAgreeID name=@rdgname value="Agree" bind="@q.Answer">
+            <input type="radio" asp-for="questions.Answer" id=@rdgAgreeID name=@rdgname value="Agree" bind-Value="@q.Answer">
             <label for="QAgree">Agree</label><br>
         </div>
 
-        
+
     }
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit"  class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
 
         </div>
     </div>
 
 
 
-</EditForm>
+</form>
 
 
 

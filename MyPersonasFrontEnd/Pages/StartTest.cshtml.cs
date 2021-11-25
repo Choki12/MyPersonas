@@ -14,8 +14,13 @@ namespace MyPersonasFrontEnd.Pages
         private readonly IApiClient _apiClient;
 
 
+
+
         [BindProperty]
         public Questions questions { get; set; }
+
+        [BindProperty]
+        public IEnumerable<Questions> Quests { get; set; }
 
         public List<QuestionsResponse> quest { get; set; } = new List<QuestionsResponse>();
 
@@ -25,6 +30,7 @@ namespace MyPersonasFrontEnd.Pages
         }
         public async Task OnGet()
         {
+            Quests = await _apiClient.GetQuestionsAsync();
 
             var myQ = await _apiClient.GetQuestionsAsync();
 
@@ -43,7 +49,7 @@ namespace MyPersonasFrontEnd.Pages
                     Id = q.Id,
                     Question = q.Question,
                     State = q.State,
-                    Number = q.Number,
+                    Number = q.Number
                     
                 };
 
@@ -58,8 +64,16 @@ namespace MyPersonasFrontEnd.Pages
             {
                 return Page();
             }
+            
 
-            await _apiClient.PutQuestionsAsync(questions); // we insert only the answer
+            foreach(var questions in Quests)
+            {
+                await _apiClient.PutAnswerAsync(questions);
+            }
+            
+
+
+             // we insert only the answer
 
             return Page();
         }

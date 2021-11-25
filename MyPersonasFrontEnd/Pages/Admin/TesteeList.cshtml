@@ -29,7 +29,7 @@
             <li class="list-group-item"><p font-size="10" font-weight="bold"><b>Name</b> &nbsp; <b>Surname</b> &nbsp; <b>Email</b>  &nbsp; <b>DOB</b></p></li>
             @foreach (var testee in Model.Testees)
             {
-                <li class="list-group-item"> @testee.Name &nbsp;@testee.Surname &nbsp; @testee.Email &nbsp; @testee.DOB <a asp-page="/Testee" asp-route-id="@testee.UserName" class="stylish-button">View data</a></li>
+                <li class="list-group-item"> @testee.Name &nbsp;@testee.Surname &nbsp; @testee.Email &nbsp; @testee.DOB <a asp-page="/Testee" asp-route-id="@testee.Email" class="stylish-button">View data</a></li>
             }
         </ul>
     </div>

@@ -1,12 +1,10 @@
-﻿@page "{name}"
+﻿@page "{username}"
 @model MyPersonasFrontEnd.Pages.TesteeModel
 @{
 
 }
-
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a asp-page="/Tests">Testees </a></li>
-    <li class="breadcrumb-item active">Testee name: @Model.Testee.Name</li>
+    <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
 </ol>
 
 
@@ -26,7 +24,7 @@
     <ul class="list-group">
         @foreach (var test in Model.Testee.Test)
         {
-            <li class="list-group-item"><a asp-page="Tests" asp-route-id="@test.Id"> Tests linked to this testee:&nbsp; <b>@test.Type</b></a></li>
+            <li class="list-group-item"><a asp-page="/Tests" asp-route-id="@test.Id"> Tests linked to this testee:&nbsp; <b>@test.Type</b></a></li>
         }
         </ul>
 </div>

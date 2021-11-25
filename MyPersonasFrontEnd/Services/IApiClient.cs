@@ -22,6 +22,10 @@ namespace MyPersonasFrontEnd.Services
         Task PutTesteeAsync(Testee mytestee);
         Task PostTesteeAsync(Testee mytestee);
 
+        Task DeleteQuestionAsync(int id);
+        Task PutAnswerAsync(Questions myquestions);
+        Task PostQuestionsAsync(Questions myQuestions);
+
 
     }
 }

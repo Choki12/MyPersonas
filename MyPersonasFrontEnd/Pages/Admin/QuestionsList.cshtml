@@ -1,0 +1,36 @@
+﻿@page
+@model MyPersonasFrontEnd.Pages.Admin.QuestionsListModel
+@{
+}
+<h1>Questions</h1>
+
+<style type="text/css">
+    .stylish-button {
+        -webkit-box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        -moz-box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        box-shadow: rgba(0,0,0,0.2) 0 1px 0 0;
+        color: #333;
+        background-color: #FA2;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 4px 16px;
+        text-shadow: #FE6 0 1px 0
+    }
+</style>
+<div class="row">
+    <div class="test-list" font-size="5">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><p font-size="10" font-weight="bold"><b>Question Number</b> &nbsp;<b>Question</b> &nbsp; <b>State of Question</b></p></li>
+
+            @foreach (var question in Model.Questions)
+            {
+                <li class="list-group-item"><a asp-page="/Tests" asp-route-id="@question.Id">@question.Number&nbsp;</a>@question.Question &nbsp; @question.State &nbsp; <a asp-page="/Questions" asp-route-id="@question.Id" class="stylish-button">View data</a></li>
+
+            }
+        </ul>
+    </div>
+</div>

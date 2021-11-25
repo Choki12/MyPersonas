@@ -167,6 +167,15 @@ namespace MyPersonasFrontEnd.Services
             response.EnsureSuccessStatusCode();
         }
 
+        public async Task PutAnswerAsync(Questions myquestions)
+        {
+
+            var response = await _httpClient.PutAsJsonAsync($"/api/Questions/{myquestions.Id}", myquestions);
+
+            response.EnsureSuccessStatusCode();
+        }
+
+
         public async Task PostTestAsync(Test mytest)
         {
             var response = await _httpClient.PostAsJsonAsync($"/api/Tests/", mytest);
@@ -181,19 +190,25 @@ namespace MyPersonasFrontEnd.Services
             response.EnsureSuccessStatusCode();
         }
 
-        /*public async Task<bool> CheckHealthAsync()
+        public async Task PostQuestionsAsync(Questions myQuestions)
         {
-            try
-            {
-                var response = await _httpClient.GetStringAsync("/health");
+            var response = await _httpClient.PostAsJsonAsync($"/api/Questions/", myQuestions);
 
-                return string.Equals(response, "Healthy", StringComparison.OrdinalIgnoreCase);
-            }
-            catch
-            {
-                return false;
-            }
-        }*/
+            response.EnsureSuccessStatusCode();
+        }
 
+        public async Task DeleteQuestionAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"/api/Questions/{id}");
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return;
+            }
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        
     }
 }

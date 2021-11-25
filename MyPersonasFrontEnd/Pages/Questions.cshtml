@@ -1,0 +1,17 @@
+﻿@page
+@model MyPersonasFrontEnd.Pages.QuestionsModel
+@{
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+</ol>
+
+<h3 style="text-align:center"> Questions data </h3>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">Question Number: <b>@Model.Questions.Number</b></li>
+    <li class="list-group-item">Question: <b>@Model.Questions.Question </b></li>
+    <li class="list-group-item">State of Question: <b>@Model.Questions.State</b></li>
+    <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/ManageQuestions" asp-route-id=@Model.Questions.Id><b>Manage Question</b></a></li>
+</ul>
+
