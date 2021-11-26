@@ -4,7 +4,12 @@
 }
 
 
-<h3 style="text-align:center">Edit Tests</h3>
+<h3 style="text-align:center">Edit Questions</h3>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Home</a><text>/&nbsp;</text><a authz-policy="Admin" asp-page="/Admin/QuestionsList">View Questions</a></li>
+    </ol>
+
 
 @if (Model.ShowMessage)
 {

@@ -27,7 +27,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label"><b>Test Date</b></label>
         <div class="col-md-10">
-            <input asp-for="Tests.DateTaken" type="date" class="form-control" placeholder="@date" value="@date" readonly/>
+            <input asp-for="Tests.DateTaken" type="text" class="form-control" placeholder="@DateTime.Today" value="@DateTime.Today" readonly/>
         </div>
     </div>
     <div class="form-group">

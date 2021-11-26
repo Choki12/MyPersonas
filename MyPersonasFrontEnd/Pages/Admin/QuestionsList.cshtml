@@ -28,7 +28,7 @@
 
             @foreach (var question in Model.Questions)
             {
-                <li class="list-group-item"><a asp-page="/Tests" asp-route-id="@question.Id">@question.Number&nbsp;</a>@question.Question &nbsp; @question.State &nbsp; <a asp-page="/Questions" asp-route-id="@question.Id" class="stylish-button">View data</a></li>
+                <li class="list-group-item"><a asp-page="/Questions" asp-route-id="@question.Id">@question.Number&nbsp;</a>@question.Question &nbsp; @question.State &nbsp; <a asp-page="/Questions" asp-route-id="@question.Id" class="stylish-button">View data</a></li>
 
             }
         </ul>

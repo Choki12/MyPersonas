@@ -71,10 +71,10 @@ namespace MyPersonasBackEnd.Controllers
             return NoContent();
         }
 
-       /* [HttpPut("{id}")]
-        public async Task<IActionResult> PutAnswer(int id, PersonalityProfilerDTO.Questions qinput)
+        /*[HttpPut]
+        public async Task<IActionResult> PutAnswer(PersonalityProfilerDTO.Questions qinput)
         {
-            var myquestions = await _context.Questions.FindAsync(id);
+            var myquestions = await _context.Questions();
             if (myquestions == null)
             {
                 return NotFound();

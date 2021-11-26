@@ -46,12 +46,8 @@ namespace MyPersonasFrontEnd.Pages.Admin
             {
                 return Page();
             }
-
-
            
-
             await _apiClient.PostQuestionsAsync(Quests);
-            
 
             Message = "Successfully created new Question";
 

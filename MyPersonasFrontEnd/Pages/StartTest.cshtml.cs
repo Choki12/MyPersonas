@@ -24,7 +24,9 @@ namespace MyPersonasFrontEnd.Pages
 
         [BindProperty]
         public IEnumerable<Questions> Quests { get; set; }
-        public List<QuestionsResponse> quest { get; set; } = new List<QuestionsResponse>();
+
+       // [BindProperty]
+       // public List<QuestionsResponse> quest { get; set; } = new List<QuestionsResponse>();
 
         public StartTestModel(IApiClient apiClient)
         {
@@ -34,48 +36,36 @@ namespace MyPersonasFrontEnd.Pages
         {
             Quests = await _apiClient.GetQuestionsAsync();
 
-            var myQ = await _apiClient.GetQuestionsAsync();
-
-            quest = await _apiClient.GetQuestionsAsync();
-            
-            if (myQ == null)
-            {
-                RedirectToPage("/Index");
-            }
-
-            foreach(var q in myQ)
-            {
-                
-                questions = new Questions
-                {
-                    Id = q.Id,
-                    Question = q.Question,
-                    State = q.State,
-                    Number = q.Number
-                    
-                };
-
-                
-            }
-          
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return Page();
-            }
-            
+            }*/
 
-            foreach(var questions in Quests)
+            //Quests = await _apiClient.GetQuestionsAsync();
+
+            foreach(var q in Quests)
             {
-                await _apiClient.PutAnswerAsync(questions);
+                await _apiClient.PutAnswerAsync(q);
             }
+
             
+          
+
+            if (Quests == null)
+            {
+                RedirectToPage("/Index");
+            }
 
 
-             // we insert only the answer
+
+
+
+
+            // we insert only the answer
 
             return Page();
         }

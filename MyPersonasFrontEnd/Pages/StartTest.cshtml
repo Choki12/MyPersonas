@@ -34,26 +34,21 @@
 <h3>Start Test</h3>
 
 <form method="post" class="form-horizontal">
-    @foreach (var q in Model.quest)
-    {
-        counter = counter + 1;
-        rdgname = "Choice" + counter.ToString();
-        rdgAgreeID = "Agree" + counter.ToString();
-        rdgDisagreeID = "Disagree" + counter.ToString();
-        rdgNeutralID = "Neutral" + counter.ToString();
+    @foreach (var q in Model.Quests)
+    { 
+      //  counter = counter + 1;
+       // rdgname = "Choice" + counter.ToString();
+       // rdgAgreeID = "Agree" + counter.ToString();
+       // rdgDisagreeID = "Disagree" + counter.ToString();
+        //rdgNeutralID = "Neutral" + counter.ToString();
 
         <div asp-validation-summary="All" class="text-danger"></div>
         <input asp-for="@q.Id" type="hidden" readonly />
         <div class="form-group">
             <label class="row">@q.Number<text>.</text>&nbsp; @q.Question</label>
-            <input type="radio" asp-for="questions.Answer" id=@rdgDisagreeID name=@rdgname value="@q.Answer" />
-            <label for="QDisagree">Disagree</label><br>
-            <input type="radio" asp-for="questions.Answer" id=@rdgNeutralID name=@rdgname value="@q.Answer" />
-            <label for="QNeutral">Neutral</label><br>
-            <input type="radio" asp-for="questions.Answer" id=@rdgAgreeID name=@rdgname value="@q.Answer" />
-            <label for="QAgree">Agree</label><br>
+            <input type="text" class="form-horizontal" asp-for="@q.Answer" value="@q.Answer"  placeholder="Enter Yes or Neutral or No" />
+         
         </div>
-
 
     }
     <div class="form-group">
