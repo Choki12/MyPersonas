@@ -13,7 +13,10 @@ namespace MyPersonasFrontEnd.Pages
     {
         private readonly IApiClient _apiClient;
 
+        [TempData]
+        public string Message { get; set; }
 
+        public bool ShowMessage => !string.IsNullOrEmpty(Message);
 
 
         [BindProperty]
@@ -21,7 +24,6 @@ namespace MyPersonasFrontEnd.Pages
 
         [BindProperty]
         public IEnumerable<Questions> Quests { get; set; }
-
         public List<QuestionsResponse> quest { get; set; } = new List<QuestionsResponse>();
 
         public StartTestModel(IApiClient apiClient)

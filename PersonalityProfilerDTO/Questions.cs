@@ -17,7 +17,7 @@ namespace PersonalityProfilerDTO
 
         public int Number { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(500)]
         public String Answer { get; set; }
 

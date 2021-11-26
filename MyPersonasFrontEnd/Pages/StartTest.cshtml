@@ -19,6 +19,14 @@
 
 }
 
+@if (Model.ShowMessage)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>   </button>
+        @Model.Message
+    </div>
+}
+
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
 </ol>
@@ -35,14 +43,14 @@
         rdgNeutralID = "Neutral" + counter.ToString();
 
         <div asp-validation-summary="All" class="text-danger"></div>
-
+        <input asp-for="@q.Id" type="hidden" readonly />
         <div class="form-group">
             <label class="row">@q.Number<text>.</text>&nbsp; @q.Question</label>
-            <input type="radio" asp-for="questions.Answer" id=@rdgDisagreeID name=@rdgname value="Disagree" bind-Value="@q.Answer">
+            <input type="radio" asp-for="questions.Answer" id=@rdgDisagreeID name=@rdgname value="@q.Answer" />
             <label for="QDisagree">Disagree</label><br>
-            <input type="radio" asp-for="questions.Answer" id=@rdgNeutralID name=@rdgname value="Neutral" bind-Value="@q.Answer">
+            <input type="radio" asp-for="questions.Answer" id=@rdgNeutralID name=@rdgname value="@q.Answer" />
             <label for="QNeutral">Neutral</label><br>
-            <input type="radio" asp-for="questions.Answer" id=@rdgAgreeID name=@rdgname value="Agree" bind-Value="@q.Answer">
+            <input type="radio" asp-for="questions.Answer" id=@rdgAgreeID name=@rdgname value="@q.Answer" />
             <label for="QAgree">Agree</label><br>
         </div>
 

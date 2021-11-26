@@ -42,8 +42,8 @@ namespace MyPersonasFrontEnd.Pages.Admin
                 Id = myquestions.Id,
                 Number = myquestions.Number,
                 Question = myquestions.Question,
-                State = myquestions.State
-
+                State = myquestions.State,
+                Answer = myquestions.Answer
             };
 
         }
@@ -60,7 +60,7 @@ namespace MyPersonasFrontEnd.Pages.Admin
 
             await _apiClient.PutQuestionsAsync(Question);
 
-            Message = "Test successfully updated";
+            Message = "Questions successfully updated";
 
             return Page();
         }

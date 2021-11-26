@@ -17,22 +17,23 @@
 <form method="post" class="form-horizontal">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="@Model.Question.Id" type="hidden" />
+    <input asp-for="@Model.Question.Answer" type="hidden" value="null" readonly />
     <div class="form-group">
         <label class="col-md-2 control-label"><b>Question Number</b></label>
         <div class="col-md-10">
-            <input type="number" asp-for="@Model.Question.Number" class="form-control"/>
+            <input type="number" asp-for="@Model.Question.Number" class="form-control" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label"><b>Question</b></label>
         <div class="col-md-10">
-            <input type="text" asp-for="@Model.Question.Question" class="form-control" value="@Model.Question.Question"/>
+            <input type="text" asp-for="@Model.Question.Question" class="form-control" value="@Model.Question.Question" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label"><b>State of Question</b></label>
         <div class="col-md-10">
-            <input asp-for="@Model.Question.State" class="form-control" value="Incomplete"/>
+            <input asp-for="@Model.Question.State" class="form-control" value="Incomplete" />
         </div>
     </div>
     <div class="form-group">
