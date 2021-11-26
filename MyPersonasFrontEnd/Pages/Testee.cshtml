@@ -4,19 +4,19 @@
 
 }
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+    <li class="breadcrumb-item"><a asp-page="/Index">Home</a><a authz-policy="Admin" asp-page="/Admin/TesteeList">View Testees</a></li>
 </ol>
 
 
 <div class="Testee">
- <h3 style="text-align:center">Testee details</h3>
- <ul class="list-group list-group-flush">
-     <li class="list-group-item"><b>Name:</b> @Model.Testee.Name</li>
-     <li class="list-group-item"><b>Surname:</b> @Model.Testee.Surname</li>
-     <li class="list-group-item"><b>Date of Birth:</b> @Model.Testee.DOB</li>
-     <li class="list-group-item"><b>Username:</b> @Model.Testee.UserName</li>
-     <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/ManageTesteescshtml" asp-route-id="@Model.Testee.UserName"><b>Manage Testee</b></a></li>
- </ul>
+    <h3 style="text-align:center">Testee details</h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Name:</b> @Model.Testee.Name</li>
+        <li class="list-group-item"><b>Surname:</b> @Model.Testee.Surname</li>
+        <li class="list-group-item"><b>Date of Birth:</b> @Model.Testee.DOB</li>
+        <li class="list-group-item"><b>Username:</b> @Model.Testee.UserName</li>
+        <li class="list-group-item"><a authz-policy="Admin" asp-page="/Admin/ManageTesteescshtml" asp-route-id="@Model.Testee.UserName"><b>Manage Testee</b></a></li>
+    </ul>
 </div>
 
 
@@ -26,5 +26,5 @@
         {
             <li class="list-group-item"><a asp-page="/Tests" asp-route-id="@test.Id"> Tests linked to this testee:&nbsp; <b>@test.Type</b></a></li>
         }
-        </ul>
+    </ul>
 </div>

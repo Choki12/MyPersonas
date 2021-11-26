@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -88,16 +89,17 @@ namespace MyPersonasBackEnd.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<QuestionsResponse>> PostTest(PersonalityProfilerDTO.Questions qinput)
+        public async Task<ActionResult<QuestionsResponse>> PostQuestion(PersonalityProfilerDTO.Questions qinput)
         {
             var myquestions = new Data.Questions
-    
+
             {
                 //Id = tinput.Id,
                 Question = qinput.Question,
                 State = qinput.State,
                 Number = qinput.Number,
                 Answer = qinput.Answer,
+          
                 
             };
 
@@ -106,7 +108,7 @@ namespace MyPersonasBackEnd.Controllers
 
             var output = myquestions.MapQuestionsResponse();
 
-            return CreatedAtAction("GetTest", new { id = output.Id }, output);
+            return CreatedAtAction(nameof(GetQuestions), new { id = output.Id }, output);
         }
 
         // DELETE: api/Tests/5

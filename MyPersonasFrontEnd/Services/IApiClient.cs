@@ -11,7 +11,7 @@ namespace MyPersonasFrontEnd.Services
         Task<List<TestResponse>> GetTestsAsync();
         Task<TestResponse> GetTestAsync(int id);
         Task<List<TesteeResponse>> GetTesteesAsync();
-        Task<TesteeResponse> GetTesteeAsync(string name);
+        Task<TesteeResponse> GetTesteeAsync(string username);
         Task PutTestAsync(Test mytest);
         Task PostTestAsync(Test mytest);
         Task<bool> AddTesteeAsync(Testee mytestee);
@@ -24,7 +24,7 @@ namespace MyPersonasFrontEnd.Services
 
         Task DeleteQuestionAsync(int id);
         Task PutAnswerAsync(Questions myquestions);
-        Task PostQuestionsAsync(Questions myQuestions);
+        Task<bool> PostQuestionsAsync(Questions myQuestions);
 
 
     }

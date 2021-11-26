@@ -71,7 +71,7 @@ namespace MyPersonasBackEnd.Data
               State = Questions.State,
               Number = Questions.Number,
               Answer = Questions.Answer,
-              Tests = Questions.TestQuestion
+              Tests = Questions.TestQuestion?
               .Select(qq =>
                   new PersonalityProfilerDTO.Test
                   {

@@ -131,7 +131,7 @@ namespace MyPersonasBackEnd.Controllers
             await _context.SaveChangesAsync();
 
             var output = Testee.MapTesteeResponse();
-            return CreatedAtAction("GetUser", new {username = output.UserName},output);
+            return CreatedAtAction(nameof(GetTestees), new {username = output.UserName},output);
         }
 
         [HttpPost("{username}/test/{testId}")]

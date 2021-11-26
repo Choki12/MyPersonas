@@ -25,9 +25,9 @@ namespace MyPersonasFrontEnd.Pages.Admin
             _apiClient = apiClient;
         }
 
-        public async Task OnGet(string name)
+        public async Task OnGet(string username)
         {
-            var mytestee = await _apiClient.GetTesteeAsync(name);
+            var mytestee = await _apiClient.GetTesteeAsync(username);
 
             if (mytestee == null)
             {

@@ -10,5 +10,7 @@ namespace PersonalityProfilerDTO
     public class TesteeResponse : Testee
     {
         public ICollection<Test> Test { get; set; } = new List<Test>();
+
+        public ICollection<Testee> Testee { get; set; } = new List<Testee>();
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 using MyPersonasFrontEnd.Services;
 using PersonalityProfilerDTO;
 
@@ -11,25 +12,24 @@ namespace MyPersonasFrontEnd.Pages
 {
     public class TesteeModel : PageModel
     {
-		private readonly IApiClient _apiClient;
+		private readonly ILogger<IndexModel> _logger;
+		protected readonly IApiClient _apiClient;
 
-		public TesteeModel (IApiClient apiClient)
+		public TesteeModel (ILogger<IndexModel> logger, IApiClient apiClient)
 		{
 			_apiClient = apiClient;
+			_logger = logger;
 		}
 
 		public TesteeResponse Testee { get; set; }
 
-		public async Task<IActionResult> OnGet(string name)
+		public async Task<IActionResult> OnGet(Testee mytestee)
 		{
-			Testee = await _apiClient.GetTesteeAsync(name);
+			Testee = await _apiClient.GetTesteeAsync(mytestee.UserName);
 
-			if (Testee == null)
-			{
-				return NotFound();
-			}
+		
 
-			//var mytestees = await _apiClient.GetTesteesAsync();
+			var mytestees = await _apiClient.GetTesteesAsync();
 			return Page();
 		}
 	}

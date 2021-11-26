@@ -93,7 +93,7 @@ namespace MyPersonasBackEnd.Controllers
 
             var output = mytest.MapTestResponse();
 
-            return CreatedAtAction("GetTest", new { id = output.Id }, output);
+            return CreatedAtAction(nameof(GetTest), new { id = output.Id }, output);
         }
 
         // DELETE: api/Tests/5

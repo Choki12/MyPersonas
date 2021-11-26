@@ -1,17 +1,17 @@
 ﻿@page
-@model MyPersonasFrontEnd.Pages.Admin.CreateTestModel
+@model MyPersonasFrontEnd.Pages.Admin.CreateQuestionsModel
 @{
     byte[] buffer = Guid.NewGuid().ToByteArray();
     var num = BitConverter.ToInt32(buffer, 8);
 
-    var date = DateTime.Now;
+
 }
 
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
 </ol>
 
-<h3 style="text-align:center">Create Test</h3>
+<h3 style="text-align:center">Create Questions</h3>
 
 @if (Model.ShowMessage)
 {
@@ -23,31 +23,30 @@
 
 <form method="post" class="form-horizontal">
     <div asp-validation-summary="All" class="text-danger"></div>
-    <input asp-for="Tests.Id" type="hidden" value="@num" readonly />
+    <input asp-for="Quests.Id" type="hidden" value="@num" readonly />
+    <input asp-for="Quests.Answer" type="hidden" value="Your Answer" readonly />
     <div class="form-group">
-        <label class="col-md-2 control-label"><b>Test Date</b></label>
+        <label class="col-md-2 control-label"><b>Question Number</b></label>
         <div class="col-md-10">
-            <input asp-for="Tests.DateTaken" type="date" class="form-control" placeholder="@date" value="@date" readonly/>
+            <input type="number" asp-for="Quests.Number" class="form-control" placeholder="Enter Question Number" />
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label"><b>Test Type</b></label>
+        <label class="col-md-2 control-label"><b>Question</b></label>
         <div class="col-md-10">
-            <textarea class="form-control" asp-for="Tests.Type" placeholder="Enter Test Type"></textarea>
+            <textarea class="form-control" asp-for="Quests.Question" placeholder="Enter Question"></textarea>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label"><b>State of Test</b></label>
+        <label class="col-md-2 control-label"><b>State of Question</b></label>
         <div class="col-md-10">
-            <input class="form-control" asp-for="Tests.TestState"  placeholder="Enter Test State"/>
+            <input class="form-control" asp-for="Quests.State" placeholder="Enter Question State" />
         </div>
     </div>
 
-
-   
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-primary" >Create test</button>
+            <button type="submit" class="btn btn-primary">Create Question</button>
         </div>
     </div>
 </form>

@@ -34,14 +34,10 @@ namespace MyPersonasFrontEnd.Services
             return true;
         }
 
-        public async Task<TesteeResponse> GetTesteeAsync(string name)
+        public async Task<TesteeResponse> GetTesteeAsync(string username)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                return null;
-            }
-
-            var response = await _httpClient.GetAsync($"/api/Testees/{name}");
+     
+            var response = await _httpClient.GetAsync($"/api/Testees/{username}");
 
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -190,11 +186,18 @@ namespace MyPersonasFrontEnd.Services
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task PostQuestionsAsync(Questions myQuestions)
+        public async Task<bool> PostQuestionsAsync(Questions myQuestions)
         {
             var response = await _httpClient.PostAsJsonAsync($"/api/Questions/", myQuestions);
 
+            if (response.StatusCode == HttpStatusCode.Conflict)
+            {
+                return false;
+            }
+
             response.EnsureSuccessStatusCode();
+
+            return true;
         }
 
         public async Task DeleteQuestionAsync(int id)
